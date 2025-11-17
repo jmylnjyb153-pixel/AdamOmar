@@ -1,3 +1,6 @@
+/* ------------------------------
+   GLOBAL RESET & BASE
+------------------------------ */
 * {
   margin: 0;
   padding: 0;
@@ -7,14 +10,13 @@
 html, body {
   width: 100%;
   height: 100%;
-  font-family: 'Inter', 'Segoe UI', -apple-system, sans-serif;
-  background: #000;
-  color: #fff;
-  overflow-x: hidden;
-}
+  font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+    sans-serif;
 
-body {
-  background: linear-gradient(135deg, #000 0%, #1a1a2e 50%, #000 100%);
+  background: #0a0a0a;
+  color: #ffffff;
+  overflow-x: hidden;
 }
 
 /* Smooth scrolling */
@@ -22,34 +24,112 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Prevent layout shift */
-body {
-  position: relative;
+/* ------------------------------
+   COLOR SYSTEM
+------------------------------ */
+:root {
+  --bg: #0a0a0a;
+  --bg-soft: #111111;
+  --text: #ffffff;
+  --text-muted: #b3b3b3;
+
+  /* Premium Neon Blue */
+  --primary: #4da8ff;
+  --primary-glow: rgba(77, 168, 255, 0.5);
+
+  /* Card glass effect */
+  --glass: rgba(255, 255, 255, 0.06);
 }
 
-/* Custom scrollbar */
+/* ------------------------------
+   CUSTOM SCROLLBAR
+------------------------------ */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
+  background: #111;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(100, 200, 255, 0.5);
-  border-radius: 5px;
+  background: var(--primary);
+  border-radius: 10px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(100, 200, 255, 0.8);
+/* ------------------------------
+   TYPOGRAPHY
+------------------------------ */
+h1, h2, h3, h4 {
+  font-weight: 600;
+  letter-spacing: -0.5px;
 }
 
-/* Loading animation */
+p {
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* ------------------------------
+   BUTTONS (GLOBAL)
+------------------------------ */
+.btn {
+  padding: 12px 26px;
+  background: var(--primary);
+  border: none;
+  border-radius: 12px;
+  color: #000;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+  box-shadow: 0 0 16px var(--primary-glow);
+}
+
+.btn:hover {
+  opacity: 0.85;
+  transform: translateY(-2px);
+}
+
+/* Outline button */
+.btn-outline {
+  padding: 12px 26px;
+  background: transparent;
+  border: 1px solid var(--primary);
+  border-radius: 12px;
+  color: var(--primary);
+  font-weight: 500;
+  transition: 0.2s ease-in-out;
+}
+
+.btn-outline:hover {
+  background: var(--primary);
+  color: #000;
+}
+
+/* ------------------------------
+   GLASS CARD (Apple style)
+------------------------------ */
+.card {
+  background: var(--glass);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 24px;
+  backdrop-filter: blur(14px);
+  transition: 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+/* ------------------------------
+   ANIMATIONS
+------------------------------ */
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(25px);
   }
   to {
     opacity: 1;
@@ -57,32 +137,16 @@ body {
   }
 }
 
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
+.fade-in {
+  animation: fadeInUp 0.7s ease-out forwards;
 }
 
-@keyframes pulse-glow {
-  0%, 100% {
-    box-shadow: 0 0 20px rgba(100, 200, 255, 0.3);
-  }
-  50% {
-    box-shadow: 0 0 40px rgba(100, 200, 255, 0.6);
-  }
+/* Floating glow */
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 20px var(--primary-glow); }
+  50% { box-shadow: 0 0 40px var(--primary-glow); }
 }
 
-.fade-in-up {
-  animation: fadeInUp 0.6s ease-out;
-}
-
-.float {
-  animation: float 3s ease-in-out infinite;
-}
-
-.pulse-glow {
-  animation: pulse-glow 2s ease-in-out infinite;
+.glow {
+  animation: glow 3s ease-in-out infinite;
 }
